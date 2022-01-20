@@ -27,4 +27,8 @@ class TradeRepositoryImpl(
     override fun findById(id: Long): TradeOutput {
         return tradeCrudRepository.findById(id).get().toOutput()
     }
+
+    override fun findByTicker(ticker: String): Sequence<TradeOutput> {
+        return tradeCrudRepository.findByTicker(ticker).asSequence().map { it.toOutput() }
+    }
 }

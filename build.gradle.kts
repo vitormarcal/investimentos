@@ -25,6 +25,7 @@ dependencies {
     runtimeOnly("com.h2database:h2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
+    implementation("org.jsoup:jsoup:1.13.1")
     runtimeOnly("org.postgresql:postgresql")
 }
 

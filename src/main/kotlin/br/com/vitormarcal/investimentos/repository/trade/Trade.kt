@@ -1,7 +1,7 @@
-package br.com.vitormarcal.investimentos.repository
+package br.com.vitormarcal.investimentos.repository.trade
 
-import br.com.vitormarcal.investimentos.input.dto.CreateTradeInput
-import br.com.vitormarcal.investimentos.input.dto.UpdateTradeInput
+import br.com.vitormarcal.investimentos.input.dto.trade.CreateTradeInput
+import br.com.vitormarcal.investimentos.input.dto.trade.UpdateTradeInput
 import br.com.vitormarcal.investimentos.output.TradeOutput
 import java.math.BigDecimal
 import java.time.LocalDateTime
@@ -11,7 +11,7 @@ import javax.persistence.*
 @Table(name = "trade")
 data class Trade(
     @Id @GeneratedValue(strategy = GenerationType.AUTO) val id: Long? = null,
-    val ticker: String,
+    @JoinColumn(name = "ticker") val ticker: String,
     val unit: Int,
     val price: BigDecimal,
     val date: LocalDateTime

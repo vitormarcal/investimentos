@@ -1,4 +1,4 @@
-package br.com.vitormarcal.investimentos.repository
+package br.com.vitormarcal.investimentos.repository.trade
 
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query

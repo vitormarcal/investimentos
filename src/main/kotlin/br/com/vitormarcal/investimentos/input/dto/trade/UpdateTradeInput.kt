@@ -1,4 +1,4 @@
-package br.com.vitormarcal.investimentos.input.dto
+package br.com.vitormarcal.investimentos.input.dto.trade
 
 import java.math.BigDecimal
 import java.time.LocalDateTime

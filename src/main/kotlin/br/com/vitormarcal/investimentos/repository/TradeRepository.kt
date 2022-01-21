@@ -10,5 +10,6 @@ interface TradeRepository {
     fun update(id: Long, updateTradeInput: UpdateTradeInput): TradeOutput
     fun findById(id: Long): TradeOutput
     fun findByTicker(ticker: String): Sequence<TradeOutput>
+    fun findAllTickers(): List<String>
 
 }

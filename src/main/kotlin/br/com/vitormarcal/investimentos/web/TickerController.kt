@@ -1,6 +1,7 @@
 package br.com.vitormarcal.investimentos.web
 
 import br.com.vitormarcal.investimentos.input.usecase.CalculatesTickerAveragePrice
+import br.com.vitormarcal.investimentos.input.usecase.FindTickersInTrades
 import br.com.vitormarcal.investimentos.input.usecase.FindTradeByTicker
 import br.com.vitormarcal.investimentos.output.TickerAveragePriceOutput
 import br.com.vitormarcal.investimentos.output.TradeOutput
@@ -13,8 +14,12 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("ticker")
 class TickerController(
     private val calculatesTickerAveragePrice: CalculatesTickerAveragePrice,
-    private val findTradeByTicker: FindTradeByTicker
+    private val findTradeByTicker: FindTradeByTicker,
+    private val findTickersInTrades: FindTickersInTrades
 ) {
+
+    @GetMapping
+    fun findMyTickers(): List<String> = findTickersInTrades.execute()
 
     @GetMapping("{ticker}/average-price")
     fun averagePrice(@PathVariable ticker: String): TickerAveragePriceOutput =

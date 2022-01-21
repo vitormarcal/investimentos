@@ -1,6 +1,6 @@
 package br.com.vitormarcal.investimentos.usecase
 
-import br.com.vitormarcal.investimentos.input.dto.UpdateTradeInput
+import br.com.vitormarcal.investimentos.input.dto.trade.UpdateTradeInput
 import br.com.vitormarcal.investimentos.input.usecase.UpdateTrade
 import br.com.vitormarcal.investimentos.output.TradeOutput
 import br.com.vitormarcal.investimentos.repository.TradeRepository
@@ -14,7 +14,7 @@ class UpdateTradeUseCase(
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
     override fun execute(id: Long, updateTradeInput: UpdateTradeInput): TradeOutput {
-        logger.info("c=${this.javaClass.simpleName} m=execute input=$updateTradeInput")
+        logger.info("c=${this.javaClass.simpleName} m=create input=$updateTradeInput")
         return tradeRepository.update(id, updateTradeInput)
     }
 }

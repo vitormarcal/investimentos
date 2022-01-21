@@ -1,8 +1,9 @@
-package br.com.vitormarcal.investimentos.repository
+package br.com.vitormarcal.investimentos.repository.trade
 
-import br.com.vitormarcal.investimentos.input.dto.CreateTradeInput
-import br.com.vitormarcal.investimentos.input.dto.UpdateTradeInput
+import br.com.vitormarcal.investimentos.input.dto.trade.CreateTradeInput
+import br.com.vitormarcal.investimentos.input.dto.trade.UpdateTradeInput
 import br.com.vitormarcal.investimentos.output.TradeOutput
+import br.com.vitormarcal.investimentos.repository.TradeRepository
 import org.springframework.stereotype.Service
 
 @Service

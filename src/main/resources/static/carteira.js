@@ -3,7 +3,7 @@ var app = new Vue({
     el: '#app',
     data: {
         trades: [],
-        averagePrices: [],
+        tickerPrices: [],
         ticker: '',
         unit: 0,
         price: 0
@@ -12,8 +12,7 @@ var app = new Vue({
         findTickers() {
             carteiraService.buscarDados().then(result => {
                 this.trades = result.trades
-                this.averagePrices = result.averagePrices
-
+                this.tickerPrices = result.tickerPrices
             })
         },
         add() {

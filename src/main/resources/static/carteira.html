@@ -35,9 +35,10 @@
         <th>preço unit. médio</th>
         </thead>
         <tbody>
-        <tr v-for="a in averagePrices">
+        <tr v-for="a in tickerPrices">
             <td>{{a.ticker}}</td>
             <td>{{a.unit}}</td>
+            <td>{{a.lastPrice}}</td>
             <td>{{a.price}}</td>
             <td>{{a.averagePrice}}</td>
         </tr>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+<main id="app">
+
+    <div class="new-ticker">
+         <label>
+             Ticker:
+            <input type="text" v-model="ticker">
+         </label>
+        <label>
+            Valor:
+            <input type="number" v-model="price">
+        </label>
+        <label>
+            Quantidade:
+            <input type="number" v-model="unit">
+        </label>
+
+        <button @click="add">Add</button>
+    </div>
+
+    <h2>Preço Médio</h2>
+    <table>
+        <thead>
+        <th>ticker</th>
+        <th>unit</th>
+        <th>preço total</th>
+        <th>preço unit. médio</th>
+        </thead>
+        <tbody>
+        <tr v-for="a in averagePrices">
+            <td>{{a.ticker}}</td>
+            <td>{{a.unit}}</td>
+            <td>{{a.price}}</td>
+            <td>{{a.averagePrice}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Todos os trades</h2>
+    <table>
+        <thead>
+            <th>ticker</th>
+            <th>price</th>
+            <th>unit</th>
+        </thead>
+        <tbody>
+            <tr v-for="t in trades">
+                <td>{{t.ticker}}</td>
+                <td>{{t.price}}</td>
+                <td>{{t.unit}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="carteira.service.js"></script>
+<script src="carteira.js"></script>
+</body>
+</html>

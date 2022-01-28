@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("ticker")
+@RequestMapping("tickers")
 class TickerController(
     private val calculatesTickerAveragePrice: CalculatesTickerAveragePrice,
     private val findTradeByTicker: FindTradeByTicker,
@@ -22,8 +22,8 @@ class TickerController(
     fun findMyTickers(): List<String> = findTickersInTrades.execute()
 
     @GetMapping("{ticker}/average-price")
-    fun averagePrice(@PathVariable ticker: String): TickerAveragePriceOutput =
-        calculatesTickerAveragePrice.execute(ticker)
+    fun averagePrice(@PathVariable("ticker") tickerList: List<String>): List<TickerAveragePriceOutput> =
+        tickerList.distinct().map(calculatesTickerAveragePrice::execute)
 
     @GetMapping("{ticker}/trades")
     fun findAllByTicker(@PathVariable ticker: String): Sequence<TradeOutput> {

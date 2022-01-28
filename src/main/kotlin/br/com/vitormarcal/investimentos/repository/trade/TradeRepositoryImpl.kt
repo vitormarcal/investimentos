@@ -36,4 +36,8 @@ class TradeRepositoryImpl(
     override fun findAllTickers(): List<String> {
         return tradeCrudRepository.findDistinctAllTickers()
     }
+
+    override fun findAllTrades(): List<TradeOutput> {
+        return tradeCrudRepository.findAll().map { it.toOutput() }
+    }
 }

@@ -19,12 +19,14 @@ var app = new Vue({
             const newTrade = {
                 'ticker': this.ticker,
                 'price': this.price,
-                'unit': this.unit
+                'unit': this.unit,
+                'side': this.side
             }
             carteiraService.createTrade(newTrade).then(() => {
                 this.ticker = '';
                 this.unit = 0;
                 this.price = 0;
+                this.side = '';
                 this.findTickers();
             })
         }

@@ -23,6 +23,11 @@
             <input type="number" v-model="unit">
         </label>
 
+        <label>
+            Side:
+            <input type="text" v-model="side">
+        </label>
+
         <button @click="add">Add</button>
     </div>
 
@@ -51,12 +56,14 @@
             <th>ticker</th>
             <th>price</th>
             <th>unit</th>
+            <th>side</th>
         </thead>
         <tbody>
             <tr v-for="t in trades">
                 <td>{{t.ticker}}</td>
                 <td>{{t.price}}</td>
                 <td>{{t.unit}}</td>
+                <td>{{t.side}}</td>
             </tr>
         </tbody>
     </table>

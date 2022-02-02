@@ -17,7 +17,7 @@ data class Trade(
     val unit: Int,
     val price: BigDecimal,
     val date: LocalDateTime,
-    val side: SideType
+    @Enumerated(value = EnumType.STRING) val side: SideType
 ) {
     fun toOutput(): TradeOutput = TradeOutput(
         id = this.id!!,

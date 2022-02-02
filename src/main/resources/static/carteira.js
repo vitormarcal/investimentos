@@ -30,6 +30,8 @@ var app = new Vue({
         }
     },
     created() {
-        this.findTickers()
+        setInterval(() => {
+            return this.findTickers();
+        }, 10000)
     }
 })

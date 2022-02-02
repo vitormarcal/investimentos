@@ -2,7 +2,9 @@ package br.com.vitormarcal.investimentos.repository.trade
 
 import br.com.vitormarcal.investimentos.input.dto.trade.CreateTradeInput
 import br.com.vitormarcal.investimentos.input.dto.trade.UpdateTradeInput
+import br.com.vitormarcal.investimentos.output.SideTypeEnumOutput
 import br.com.vitormarcal.investimentos.output.TradeOutput
+import br.com.vitormarcal.investimentos.repository.trade.SideType.*
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import javax.persistence.*
@@ -14,14 +16,16 @@ data class Trade(
     @JoinColumn(name = "ticker") val ticker: String,
     val unit: Int,
     val price: BigDecimal,
-    val date: LocalDateTime
+    val date: LocalDateTime,
+    val side: SideType
 ) {
     fun toOutput(): TradeOutput = TradeOutput(
         id = this.id!!,
         ticker = this.ticker,
         unit = this.unit,
         price = this.price,
-        date = this.date
+        date = this.date,
+        side = SideTypeEnumOutput.valueOf(this.side.name)
     )
 
     companion object {
@@ -30,14 +34,16 @@ data class Trade(
             ticker = output.ticker,
             unit = output.unit,
             price = output.price,
-            date = output.date
+            date = output.date,
+            side = SideType.valueOf(output.side.name)
         )
 
         fun fromInput(input: CreateTradeInput): Trade = Trade(
             ticker = input.ticker,
             unit = input.unit,
             price = input.price,
-            date = LocalDateTime.now()
+            date = LocalDateTime.now(),
+            side = SideType.valueOf(input.side.name)
         )
 
         fun fromInput(input: UpdateTradeInput, defaultTrade: Trade) = Trade(
@@ -45,7 +51,13 @@ data class Trade(
             ticker = input.ticker ?: defaultTrade.ticker,
             unit = input.unit ?: defaultTrade.unit,
             price = input.price ?: defaultTrade.price,
-            date = input.date ?: defaultTrade.date
+            date = input.date ?: defaultTrade.date,
+            side = input.side?.let { SideType.valueOf(input.side.name) } ?: defaultTrade.side
         )
     }
+}
+
+enum class SideType {
+    BUY,
+    SELL
 }

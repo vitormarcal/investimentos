@@ -8,5 +8,11 @@ data class TradeOutput(
     val ticker: String,
     val unit: Int,
     val price: BigDecimal,
-    val date: LocalDateTime
+    val date: LocalDateTime,
+    val side: SideTypeEnumOutput
 )
+
+enum class SideTypeEnumOutput {
+    BUY,
+    SELL
+}

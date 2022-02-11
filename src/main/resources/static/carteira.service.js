@@ -45,8 +45,9 @@ class CarteiraService {
                     .map(i => averagePriceList.find(o => o.ticker === i))
                     .map(data => {
                         data['lastPrice'] = lastPriceList.find(o => o.ticker === data.ticker).price
+                        data['sellPrice'] = data.lastPrice * data.unit
                         return data
-                })
+                    })
             }))
     }
 

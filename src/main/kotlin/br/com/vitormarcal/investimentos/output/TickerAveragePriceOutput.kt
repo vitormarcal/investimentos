@@ -5,7 +5,9 @@ import java.math.BigDecimal
 data class TickerAveragePriceOutput(
     val ticker: String? = null,
     val unit: Long = 0,
-    val price: BigDecimal = BigDecimal.ZERO
+    val price: BigDecimal = BigDecimal.ZERO,
+    val unitSell: Long = 0,
+    val priceSell: BigDecimal = BigDecimal.ZERO,
 ) {
 
     val averagePrice = if (price == BigDecimal.ZERO || unit == 0L) BigDecimal.ZERO else price / unit.toBigDecimal()

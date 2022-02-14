@@ -11,7 +11,7 @@ import java.math.BigDecimal
 @Service
 class CalculatesTickerAveragePriceUseCase(
     private val tradeRepository: TradeRepository
-): CalculatesTickerAveragePrice {
+) : CalculatesTickerAveragePrice {
 
     override fun execute(ticker: String): TickerAveragePriceOutput {
         return execute(tradeRepository.findByTicker(ticker).toList())
@@ -20,12 +20,17 @@ class CalculatesTickerAveragePriceUseCase(
 
     override fun execute(tradeList: List<TradeOutput>): TickerAveragePriceOutput {
 
-        val tradeSell = tradeList.filter { it.side == SideTypeEnumOutput.SELL }.fold(TickerAveragePriceOutput(), TickerAveragePriceOutput::add)
+        val newTradeList = TradeOutput.getTradeStartWithZeroUnit(tradeList)
 
-        val tradeBuy = tradeList.filter { it.side == SideTypeEnumOutput.BUY }.fold(TickerAveragePriceOutput(
-            unitSell = tradeSell.unit,
-            priceSell = tradeSell.price
-        ), TickerAveragePriceOutput::add)
+        val tradeSell = newTradeList.filterBySellSide()
+            .fold(TickerAveragePriceOutput(), TickerAveragePriceOutput::add)
+
+        val tradeBuy = newTradeList.filterByBuySide().fold(
+            TickerAveragePriceOutput(
+                unitSell = tradeSell.unit,
+                priceSell = tradeSell.price
+            ), TickerAveragePriceOutput::add
+        )
 
         val unit = tradeBuy.unit - tradeSell.unit
         val price = tradeBuy.price - tradeSell.price
@@ -37,5 +42,7 @@ class CalculatesTickerAveragePriceUseCase(
         )
     }
 
+    private fun List<TradeOutput>.filterByBuySide() = this.filter { it.side == SideTypeEnumOutput.BUY }
+    private fun List<TradeOutput>.filterBySellSide() = this.filter { it.side == SideTypeEnumOutput.SELL }
 
 }

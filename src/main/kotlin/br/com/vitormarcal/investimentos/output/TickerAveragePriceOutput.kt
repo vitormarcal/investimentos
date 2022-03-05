@@ -4,6 +4,7 @@ import java.math.BigDecimal
 
 data class TickerAveragePriceOutput(
     val ticker: String? = null,
+    val market: String? = null,
     val unit: Long = 0,
     val price: BigDecimal = BigDecimal.ZERO,
     val unitSell: Long = 0,
@@ -16,6 +17,11 @@ data class TickerAveragePriceOutput(
         val newUnit = this.unit + trade.unit
         val priceTotal = this.price + (trade.price * trade.unit.toBigDecimal())
 
-        return TickerAveragePriceOutput(trade.ticker, newUnit, priceTotal)
+        return TickerAveragePriceOutput(
+            ticker = trade.ticker,
+            market = trade.market,
+            unit = newUnit,
+            price = priceTotal
+        )
     }
 }

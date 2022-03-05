@@ -11,11 +11,13 @@ import javax.persistence.Table
 @Table(name = "ticker")
 data class Ticker(
     @Id val ticker: String,
+    val market: String,
     val companyName: String,
     @Lob val description: String? = null
 ) {
     fun toOutput(): TickerOutput = TickerOutput(
         ticker = this.ticker,
+        market = this.market,
         companyName = this.companyName,
         description = this.description
     )
@@ -23,6 +25,7 @@ data class Ticker(
     companion object {
         fun fromInput(input: CreateTickerInput): Ticker = Ticker(
             ticker = input.ticker,
+            market = input.market,
             companyName = input.companyName,
             description = input.description
         )

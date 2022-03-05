@@ -1,5 +1,6 @@
 package br.com.vitormarcal.investimentos.usecase
 
+import br.com.vitormarcal.investimentos.input.dto.ticker.TickerIdentificationInput
 import br.com.vitormarcal.investimentos.input.dto.trade.CreateTradeInput
 import br.com.vitormarcal.investimentos.input.usecase.CreateTrade
 import br.com.vitormarcal.investimentos.output.TickerInfoOutput
@@ -26,8 +27,8 @@ class CreateTradeUseCase(
     }
 
     private fun createTickerIfNotExists(createTradeInput: CreateTradeInput) {
-        createTradeInput.ticker
-            .takeUnless { tickerRepository.existsById(createTradeInput.ticker) }
+        createTradeInput.takeUnless { tickerRepository.existsById(createTradeInput.ticker) }
+            ?.let { TickerIdentificationInput(it.ticker, it.market) }
             ?.let(getTickerInfoService::execute)
             ?.let(TickerInfoOutput::toTickerInput)
             ?.let(tickerRepository::create)

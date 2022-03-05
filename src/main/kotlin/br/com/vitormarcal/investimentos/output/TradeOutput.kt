@@ -6,6 +6,7 @@ import java.time.LocalDateTime
 data class TradeOutput(
     val id: Long,
     val ticker: String,
+    val market: String,
     val unit: Int,
     val price: BigDecimal,
     val date: LocalDateTime,

@@ -14,6 +14,7 @@ import javax.persistence.*
 data class Trade(
     @Id @GeneratedValue(strategy = GenerationType.AUTO) val id: Long? = null,
     @JoinColumn(name = "ticker") val ticker: String,
+    val market: String,
     val unit: Int,
     val price: BigDecimal,
     val date: LocalDateTime,
@@ -22,6 +23,7 @@ data class Trade(
     fun toOutput(): TradeOutput = TradeOutput(
         id = this.id!!,
         ticker = this.ticker,
+        market = this.market,
         unit = this.unit,
         price = this.price,
         date = this.date,
@@ -32,6 +34,7 @@ data class Trade(
         fun fromOutput(output: TradeOutput): Trade = Trade(
             id = output.id,
             ticker = output.ticker,
+            market = output.market,
             unit = output.unit,
             price = output.price,
             date = output.date,
@@ -40,6 +43,7 @@ data class Trade(
 
         fun fromInput(input: CreateTradeInput): Trade = Trade(
             ticker = input.ticker,
+            market = input.market,
             unit = input.unit,
             price = input.price,
             date = LocalDateTime.now(),
@@ -49,6 +53,7 @@ data class Trade(
         fun fromInput(input: UpdateTradeInput, defaultTrade: Trade) = Trade(
             id = defaultTrade.id!!,
             ticker = input.ticker ?: defaultTrade.ticker,
+            market = input.market ?: defaultTrade.market,
             unit = input.unit ?: defaultTrade.unit,
             price = input.price ?: defaultTrade.price,
             date = input.date ?: defaultTrade.date,

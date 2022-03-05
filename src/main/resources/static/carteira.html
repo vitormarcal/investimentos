@@ -11,9 +11,13 @@
 
     <div class="new-ticker">
          <label>
-             Ticker:
-            <input type="text" v-model="ticker">
+             Market:
+            <input type="text" v-model="market">
          </label>
+        <label>
+            Ticker:
+            <input type="text" v-model="ticker">
+        </label>
         <label>
             Valor:
             <input type="number" v-model="price">
@@ -34,6 +38,7 @@
     <h2>Preço Médio</h2>
     <table>
         <thead>
+        <th>market</th>
         <th>ticker</th>
         <th>unit</th>
         <th>preço de venda</th>
@@ -42,6 +47,7 @@
         </thead>
         <tbody>
         <tr v-for="a in tickerPrices">
+            <td>{{a.market}}</td>
             <td>{{a.ticker}}</td>
             <td>{{a.unit}}</td>
             <td>{{a.lastPrice}}</td>
@@ -55,6 +61,7 @@
     <h2>Todos os trades</h2>
     <table>
         <thead>
+            <th>market</th>
             <th>ticker</th>
             <th>price</th>
             <th>unit</th>
@@ -62,6 +69,7 @@
         </thead>
         <tbody>
             <tr v-for="t in trades">
+                <td>{{t.market}}</td>
                 <td>{{t.ticker}}</td>
                 <td>{{t.price}}</td>
                 <td>{{t.unit}}</td>

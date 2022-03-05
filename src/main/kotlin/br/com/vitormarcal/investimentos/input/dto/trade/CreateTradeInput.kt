@@ -5,6 +5,7 @@ import java.math.BigDecimal
 
 data class CreateTradeInput(
     val ticker: String,
+    val market: String,
     val unit: Int,
     val price: BigDecimal,
     val side: SideTypeEnumInput = BUY

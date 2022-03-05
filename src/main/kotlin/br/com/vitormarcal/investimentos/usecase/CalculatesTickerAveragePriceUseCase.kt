@@ -37,6 +37,7 @@ class CalculatesTickerAveragePriceUseCase(
 
         return TickerAveragePriceOutput(
             ticker = tradeList.first().ticker,
+            market = tradeList.first().market,
             unit = unit,
             price = price.takeIf { it > BigDecimal.ZERO } ?: BigDecimal.ZERO
         )

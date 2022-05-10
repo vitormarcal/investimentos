@@ -1,29 +1,30 @@
 class CarteiraService {
 
-    async  buscarDados() {
+    async buscarDados() {
 
-        return Promise.all([this.findAllTrades(), this.findTickerPriceInfos()]).then(results => {
+        return Promise.all([this.findAllTrades(), this.findTickerPriceInfos(), this.findMoneyBooked()]).then(results => {
             return {
                 'trades': results[0],
                 'tickerPrices': results[1],
+                'amountBooked': results[2]
             }
         })
     }
 
-    async  findTickers() {
+    async findTickers() {
         return fetch('/tickers')
             .then(response => this.handleResponse(response));
     }
 
-    async  findAllTrades() {
+    async findAllTrades() {
         return fetch('/trades')
             .then(response => this.handleResponse(response));
     }
 
-    async  createTrade(newTrade) {
+    async createTrade(newTrade) {
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newTrade)
         };
 
@@ -68,6 +69,23 @@ class CarteiraService {
     async findAveragePrices(tickers) {
         const path = tickers.join(',')
         return fetch(`/tickers/${path}/average-price`)
+            .then(response => this.handleResponse(response));
+    }
+
+    async addNewTed(newTedValue) {
+        const requestOptions = {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({"amount": newTedValue, "side": "BUY"})
+        };
+
+        return fetch(`/teds/`, requestOptions)
+            .then(response => this.handleResponse(response))
+            .then(result => result.amount)
+    }
+
+    async findMoneyBooked() {
+        return fetch(`/teds/booked`)
             .then(response => this.handleResponse(response));
     }
 }

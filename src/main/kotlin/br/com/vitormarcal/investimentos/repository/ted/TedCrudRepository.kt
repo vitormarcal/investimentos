@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import javax.transaction.Transactional
 
 @Transactional
-interface TedCrudRepository: JpaRepository<Ted, String> {
+interface TedCrudRepository: JpaRepository<Ted, Long> {
 
 
     fun findAllBySide(side: SideType): List<Ted>

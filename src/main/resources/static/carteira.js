@@ -14,7 +14,7 @@ var app = new Vue({
         findTickers() {
             carteiraService.buscarDados().then(result => {
                 this.trades = result.trades
-                this.tickerPrices = result.tickerPrices
+                this.tickerPrices = result.tickerPrices.sort((a, b) => b.price - a.price)
             })
         },
         add() {

@@ -5,7 +5,9 @@ import br.com.vitormarcal.investimentos.input.dto.trade.SideTypeEnumInput
 import br.com.vitormarcal.investimentos.output.TedOutput
 import br.com.vitormarcal.investimentos.repository.TedRepository
 import br.com.vitormarcal.investimentos.repository.trade.SideType
+import org.springframework.stereotype.Service
 
+@Service
 class TedRepositoryImpl(private val tedCrudRepository: TedCrudRepository) : TedRepository {
     override fun create(tedInput: CreateTedInput): TedOutput {
         return Ted.fromInput(tedInput).let { newTed ->
@@ -18,5 +20,9 @@ class TedRepositoryImpl(private val tedCrudRepository: TedCrudRepository) : TedR
             tedCrudRepository.findAllBySide(sideType)
                 .map { it.toOutput() }
         }
+    }
+
+    override fun findAll(): List<TedOutput> {
+        return tedCrudRepository.findAll().map { it.toOutput() }
     }
 }

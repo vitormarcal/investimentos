@@ -7,4 +7,5 @@ import br.com.vitormarcal.investimentos.output.TedOutput
 interface TedRepository {
     fun create(tedInput: CreateTedInput): TedOutput
     fun findAllBySide(side: SideTypeEnumInput): List<TedOutput>
+    fun findAll(): List<TedOutput>
 }

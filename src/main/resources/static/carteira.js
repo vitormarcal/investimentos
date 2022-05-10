@@ -4,18 +4,36 @@ var app = new Vue({
     data: {
         trades: [],
         tickerPrices: [],
+        amountBooked: 0,
+        newTedValue: 0,
         market: 'BVMF',
         ticker: '',
         side: 'BUY',
         unit: 0,
         price: 0
     },
+    computed: {
+        investedValue() {
+            return this.tickerPrices.reduce((a, b) => {
+                return a +  b.price || 0;
+            }, 0)
+        },
+        diff() {
+           return Math.round((this.investedValue - this.amountBooked) * 100) / 100
+        }
+    },
     methods: {
         findTickers() {
             carteiraService.buscarDados().then(result => {
                 this.trades = result.trades
                 this.tickerPrices = result.tickerPrices.sort((a, b) => b.price - a.price)
+                this.amountBooked = result.amountBooked
             })
+        },
+        addNewTed() {
+            carteiraService.addNewTed(this.newTedValue).then(result => {
+                this.amountBooked += result
+            }).finally(() => this.newTedValue = 0)
         },
         add() {
             const newTrade = {

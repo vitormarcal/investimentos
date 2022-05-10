@@ -13,7 +13,17 @@
 
 <main id="app">
 
+    <div class="new-ted">
+        <h2>Novo ted</h2>
+        <label>
+            Valor:
+            <input type="text" v-model="newTedValue">
+            <button @click="addNewTed">Add</button>
+        </label>
+    </div>
+
     <div class="new-ticker">
+        <h2>Novo ticket</h2>
         <label>
             Market:
             <input type="text" v-model="market">
@@ -40,6 +50,9 @@
     </div>
 
     <h2>carteira atual</h2>
+    <p> Valor reservado para investimento: {{ amountBooked }} </p>
+    <p> Valor investido : {{ investedValue }} </p>
+    <p> Diferença reservado - investido : {{ diff }} </p>
     <table class="table table-striped table-hover">
         <thead>
         <tr>

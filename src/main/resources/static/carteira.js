@@ -18,8 +18,16 @@ var app = new Vue({
                 return a +  b.price || 0;
             }, 0)
         },
+        liquidValue() {
+            return this.tickerPrices.reduce((a, b) => {
+                return a +  b.sellPrice || 0;
+            }, 0)
+        },
         diff() {
            return Math.round((this.investedValue - this.amountBooked) * 100) / 100
+        },
+        diffLiquidValue() {
+            return Math.round((this.liquidValue - this.amountBooked) * 100) / 100
         }
     },
     methods: {
